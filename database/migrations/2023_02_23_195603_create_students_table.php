@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string('father_name');
             $table->string('tazkera_no');
             $table->string('gender');
-            $table->string('dob');
-            $table->string('current_address');
+            $table->date('dob')->nullable();
+            $table->string('current_address')->nullable();
             $table->string('permenent_address');
             $table->string('join_year');
+            $table->string('graduated_at')->nullable();
             $table->string('image');
-            $table->integer('department_id')->unsigned();
+            $table->integer('current_senf_id')->unsigned();
             $table->timestamps();
         });
     }

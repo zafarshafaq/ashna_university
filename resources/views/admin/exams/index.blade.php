@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('pagename')
-Faculties
+Exams
 @endsection
 @section('content')
 <div class="col-lg-12">
 
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Faculties List</h5>
+        <h5 class="card-title">Exams List</h5>
 
         <!-- Table with stripped rows -->
         <table id="example1" class="table table-bordered table-condensed table-hover table-striped">
@@ -15,34 +15,44 @@ Faculties
 
             <tr>
                 <th>No</th>
-                <th>Name</th>
+                <th>Subject</th>
+                <th>Class Name</th>
+                <th>Credit</th>
+                <th>Type</th>
+                <th>Taken Date</th>
                 <th>Manipulate</th>
             </tr>
             </thead>
             <tbody>
-                @foreach($faculties as $faculty)
+                @foreach($exams as $Exam)
                     <tr>
                         <td>{{ $loop->index+1 }}</td>
-{{--                            <td><img src="{{ Storage::disk('local')->url($faculty->image) }}" style="max-height: 60px;border-radius: 10%;max-width: 70px"></td>--}}
-                        <td>{{ $faculty->name }}</td>
+{{--                            <td><img src="{{ Storage::disk('local')->url($Exam->image) }}" style="max-height: 60px;border-radius: 10%;max-width: 70px"></td>--}}
+
+                        <td>{{ $Exam->senf_subject->subject->name }}</td>
+                        <td>{{ $Exam->senf_subject->senf->name }}</td>
+                        <td>{{ $Exam->senf_subject->credit }}</td>
+                        <td>{{ $Exam->type }}</td>
+                        <td>{{ $Exam->taken_date }}</td>
                         <td>
-                            <form id="del-form-{{ $faculty->id }}" action="{{ route('faculties.destroy',$faculty->id) }}" method="post">
+                            <form id="del-form-{{ $Exam->id }}" action="{{ route('exams.destroy',$Exam) }}" method="post">
                                 {{csrf_field()}}
                                 {{method_field('delete')}}
                                 <div class="btn-group btn-group-sm" role="group">
 
-                                    {{-- @can('faculties.update',Auth::user()) --}}
+                                    {{-- @can('exams.update',Auth::user()) --}}
 
-                                    <a class="btn btn-info" href="{{ route('faculties.edit',$faculty->id) }}"><span class="glyphicon glyphicon-edit"></span>edit</a>
+                                    <a class="btn btn-info" href="{{ route('exams.edit',$Exam) }}"><span class="glyphicon glyphicon-edit"></span>edit</a>
+                                    <a class="btn btn-dark" href="{{ route('exams.show',$Exam) }}"><span class="glyphicon glyphicon-edit"></span>result</a>
                                     {{-- @endcan --}}
 
-                                     {{-- @can('faculties.delete',Auth::user()) --}}
+                                     {{-- @can('exams.delete',Auth::user()) --}}
 
                                         {{--<input type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger delete-btn" value="delete" />--}}
                                     <a href="#" onclick="
                                             if(confirm('Are you sure to delete')){
                                             event.preventDefault();
-                                            document.getElementById('del-form-{{ $faculty->id }}').submit();
+                                            document.getElementById('del-form-{{ $Exam->id }}').submit();
                                             }
                                             else event.preventDefault();
 
@@ -57,7 +67,7 @@ Faculties
             </tbody>
         </table>
         <!-- End Table with stripped rows -->
-        <a href="{{ route("faculties.create")}}" style="display: inline; float: right" class="btn btn-primary col-lg-3">Add New faculty</a>
+        <a href="{{ route("exams.create")}}" style="display: inline; float: right" class="btn btn-primary col-lg-3">Add New Exam</a>
       </div>
     </div>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Result;
+use App\Models\Exam;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
@@ -14,7 +15,8 @@ class ResultController extends Controller
      */
     public function index()
     {
-        //
+        $results = Result::all();
+        return view('admin.students.index', compact('results'));
     }
 
     /**
@@ -46,7 +48,7 @@ class ResultController extends Controller
      */
     public function show(Result $result)
     {
-        //
+
     }
 
     /**

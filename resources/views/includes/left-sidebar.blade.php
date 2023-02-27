@@ -113,18 +113,18 @@
         </a>
         <ul id="exam-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tables-general.html">
+            <a href="{{ route('exams.create') }}">
               <i class="bi bi-circle"></i><span>New Exam</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
+            <a href="{{ route('exams.index') }}">
               <i class="bi bi-circle"></i><span>Exam List</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Add Student Result</span>
+            <a href="{{ route('results.index') }}">
+              <i class="bi bi-circle"></i><span>Exam Results List</span>
             </a>
           </li>
         </ul>

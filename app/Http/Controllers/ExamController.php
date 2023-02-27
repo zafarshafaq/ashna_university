@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
+use App\Models\SenfSubject;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -14,7 +15,8 @@ class ExamController extends Controller
      */
     public function index()
     {
-        //
+        $exams = Exam::all();
+        return view('admin.exams.index', compact('exams'));
     }
 
     /**
@@ -24,7 +26,8 @@ class ExamController extends Controller
      */
     public function create()
     {
-        //
+        $senf_subjects = SenfSubject::all();
+        return view('admin.exams.create', compact('senf_subjects'));
     }
 
     /**
@@ -35,7 +38,12 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $exam = new Exam;
+        $exam->type = $request->type;
+        $exam->taken_date = $request->taken_date;
+        $exam->senf_subject_id = $request->senf_subject;
+        $exam->save();
+        return redirect(route('exams.index'));
     }
 
     /**
@@ -46,7 +54,20 @@ class ExamController extends Controller
      */
     public function show(Exam $exam)
     {
-        //
+        return $students = Student::where('senf_id
+        ')
+        if($exam->type == 'final'){
+
+            $mid_exam = Exam::where('senf_subject_id', $exam->senf_subject_id )->wher('type', '20')->first();
+            return view('admin.results.final',compact('mid_exam','exam'));
+        }
+        elseif($exam->type == '20'){
+
+            return view('admin.results.mid',compact('exam'));
+        }
+        else{
+            return 'The Exam Type is incorrect';
+        }
     }
 
     /**
@@ -57,7 +78,8 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
-        //
+        $senf_subjects = SenfSubject::all();
+        return view('admin.exams.edit', compact('senf_subjects', 'exam'));
     }
 
     /**
@@ -69,7 +91,11 @@ class ExamController extends Controller
      */
     public function update(Request $request, Exam $exam)
     {
-        //
+        $exam->type = $request->type;
+        $exam->taken_date = $request->taken_date;
+        $exam->senf_subject_id = $request->senf_subject;
+        $exam->update();
+        return redirect(route('exams.index'));
     }
 
     /**

@@ -33,8 +33,8 @@ class Senf extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function roles(): BelongsToMany
+    public function students(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class, 'role_user_table', 'user_id', 'role_id');
+        return $this->belongsToMany(Student::class);
     }
 }

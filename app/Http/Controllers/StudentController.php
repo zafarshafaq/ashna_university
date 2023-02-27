@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Senf;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -14,7 +15,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        $senfs = Senf::all();
+        return view('admin.students.index', compact('students', 'senfs'));
     }
 
     /**
@@ -24,7 +27,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        $senfs = Senf::all();
+        return view('admin.students.create', compact('senfs'));
     }
 
     /**
@@ -35,7 +39,21 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student = new Student;
+        $student->name = $request->name;
+        $student->father_name = $request->father_name;
+        $student->dob = $request->dob;
+        $student->gender = $request->gender;
+        $student->current_address = $request->current_address;
+        $student->permenent_address = $request->permenent_address;
+        // $student->phone = $request->phone;
+        $student->tazkera_no = $request->tazkera_no;
+        $student->current_senf_id = $request->senf_id;
+        $student->senfs()->sync($request->senf_id);
+        $student->graduated_at = $request->graduated_at;
+        $student->join_year = $request->join_year;
+        $student->save();
+        return redirect(route('students.index'));
     }
 
     /**

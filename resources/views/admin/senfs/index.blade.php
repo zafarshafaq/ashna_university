@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('pagename')
-senfs
+Class
 @endsection
 @section('content')
 <div class="col-lg-12">
 
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">senfs List</h5>
+        <h5 class="card-title">Classes List</h5>
 
         <!-- Table with stripped rows -->
         <table id="example1" class="table table-bordered table-condensed table-hover table-striped">
@@ -69,7 +69,7 @@ senfs
             </tbody>
         </table>
         <!-- End Table with stripped rows -->
-        <a href="{{ route("senfs.create")}}" style="display: inline; float: right" class="btn btn-primary col-lg-3">Add New senf</a>
+        <a href="{{ route("senfs.create")}}" style="display: inline; float: right" class="btn btn-primary col-lg-3">Add New Class</a>
       </div>
     </div>
 </div>
